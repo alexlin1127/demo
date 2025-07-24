@@ -4,6 +4,7 @@ from .serializers import TodoSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from django_filters import rest_framework as filter
+from rest_framework.permissions import IsAuthenticated
 
 # django-filter 專門用來處理Django REST Framework的過濾功能
 class TodoFilter(filter.FilterSet):
@@ -16,6 +17,7 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset =  Todo.objects.all().order_by('-created_time')   # 定義 viewset，找資料庫以及他如何回傳給前端
     serializer_class = TodoSerializer  # 將序列化層綁訂到這個 viewset
     filterset_class = TodoFilter       # 將過濾器綁訂到這個 viewset
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
 
