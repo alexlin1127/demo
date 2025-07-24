@@ -13,7 +13,7 @@ class TodoFilter(filter.FilterSet):
         fields = ('title',)
 
 class TodoViewSet(viewsets.ModelViewSet):
-    # http_method_names = ['GET', 'POST']                                # 只開放使用者get，無法post。
+    http_method_names = ['get', 'post', 'patch', 'delete']
     queryset =  Todo.objects.all().order_by('-created_time')   # 定義 viewset，找資料庫以及他如何回傳給前端
     serializer_class = TodoSerializer  # 將序列化層綁訂到這個 viewset
     filterset_class = TodoFilter       # 將過濾器綁訂到這個 viewset
@@ -21,10 +21,8 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
 
-        # print(request.data)
         request_data = request.data
         # request_data['title'] = f'python_course_{request_data['title']}'
-        
         
         serializer = self.get_serializer(data=request_data)
         serializer.is_valid(raise_exception=True)
