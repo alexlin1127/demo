@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Todo
-from .serializers import TodoSerializer
+from .models import Todo, File
+from .serializers import TodoSerializer, FileSerilizer
 from rest_framework import status
 from rest_framework.response import Response
 from django_filters import rest_framework as filter
@@ -32,3 +32,8 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+class FileViewSet(viewsets.ModelViewSet):
+    queryset = File.objects.all()
+    serializer_class = FileSerilizer
+    permission_classes = [IsAuthenticated]
