@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 class TodoFilter(filter.FilterSet):
     class Meta:
         model = Todo
-        fields = ('title',)
+        fields = ('title')
 
 class TodoViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']

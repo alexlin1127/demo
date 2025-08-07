@@ -1,0 +1,24 @@
+services:
+
+  course-adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8022:8080
+
+  course-db:
+    image: mysql:8.4.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  # course-backend:
+  #   image: django-course
+  #   restart: always
+  #   ports:
+  #     - 8002:8000
+    # command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    # volumns:
+    #   - C:/Users/Alex/Desktop/course/demo:/app
+
+  # docker compose up
